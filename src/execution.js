@@ -47,6 +47,26 @@ define(['jquery', './xhr'], function($, xhr) {
         // create empty promise-like Ember.Object
         var d = $.Deferred();
 
+        request = {
+            "execution": {
+                "columns": ["fact.opportunitysnapshot.amount.generated.sum.9c4a262f5bbb772d82092ee9fdd8447d"],
+                "where": {
+                    "closed.date.mmddyyyy": {
+                        "$between": [-29, 0]
+                    }
+                },
+                "orderBy": [],
+                "definitions": [{
+                    "metricDefinition": {
+                        "title": "Sum of Amount",
+                        "identifier": "fact.opportunitysnapshot.amount.generated.sum.9c4a262f5bbb772d82092ee9fdd8447d",
+                        "expression": "SELECT SUM({fact.opportunitysnapshot.amount})",
+                        "format": "#,##0.00"
+                    }
+                }]
+            }
+        };
+
         // Execute request
         xhr.post('/gdc/internal/projects/'+projectId+'/experimental/executions', {
             data: JSON.stringify(request)
